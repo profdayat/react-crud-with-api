@@ -1,17 +1,26 @@
 import React, {Component, Fragment} from 'react';
 import './BlogPost.css';
 import Post from '../component/Post/Post';
+import axios from 'axios';
 
 class BlogPost extends Component {
     state = {
         post: []
     }
+
     componentDidMount(){
-        fetch('https://jsonplaceholder.typicode.com/posts')
-        .then(response => response.json())
-        .then(json => {
+        // fetch('https://jsonplaceholder.typicode.com/posts')
+        // .then(response => response.json())
+        // .then(json => {
+        //     this.setState({
+        //         post: json
+        //     })
+        // })
+        axios.get('https://jsonplaceholder.typicode.com/posts')
+        .then((result) => {
+            console.log(result.data)
             this.setState({
-                post: json
+                post: result.data
             })
         })
     }
