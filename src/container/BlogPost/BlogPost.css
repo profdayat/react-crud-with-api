@@ -46,16 +46,26 @@
     color: #4a4a4a;
 }
 
-.remove {
+button.remove {
     padding: 12px 18px;
-    background: red;
+    background: #e91e63;
     color: white;
     border-radius: 4px;
     outline: none;
     margin-top: 18px;    
 }
 
-.remove:hover {
+button.update {
+    padding: 12px 18px;
+    background: #8bc34a;
+    color: white;
+    border-radius: 4px;
+    outline: none;
+    margin-top: 18px;    
+    margin-right: 10px;
+}
+
+.remove:hover, .update:hover {
     cursor: pointer;
 }
 
@@ -101,4 +111,10 @@ button.btn-submit {
     text-transform: uppercase;
     font-weight: bold;
     margin-top: 30px;
+}
+
+button.btn-submit:hover {
+    background: #2196f3;
+    color: white;
+    cursor: pointer;
 }
