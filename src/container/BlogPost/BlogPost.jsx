@@ -15,7 +15,7 @@ class BlogPost extends Component {
     }
 
     getPostAPI = () => {
-        axios.get('http://localhost:3004/posts')
+        axios.get('http://localhost:3004/posts?_sort=id&_order=desc')
         .then((result) => {
             this.setState({
                 post: result.data
@@ -32,12 +32,24 @@ class BlogPost extends Component {
 
     handleFormChange = (event) => {
         let formBlogPostNew = {...this.state.formBlogPost};
-        console.log(event.target.name);
+        let timestamp = new Date().getTime();
+        formBlogPostNew['id'] = timestamp;
         formBlogPostNew[event.target.name] = event.target.value;
         this.setState({
             formBlogPost: formBlogPostNew
-        }, () => {
-            console.log('value object formBlogPost', this.state.formBlogPost)
+        })
+    }
+
+    handleSubmit = () => {
+        this.postDataToAPI();
+    }
+
+    postDataToAPI = () => {
+        axios.post('http://localhost:3004/posts', this.state.formBlogPost).then((res) => {
+            console.log(res);
+            this.getPostAPI();
+        }, (err) => {
+            console.log('error', err);
         })
     }
 
@@ -60,7 +72,7 @@ class BlogPost extends Component {
                     <input type="text" name="title" placeholder="add title" onChange={this.handleFormChange} />
                     <label htmlFor="body">Blog Content</label>
                     <textarea type="text" name="body" id="body" col="30" row="10" placeholder="add blog content" onChange={this.handleFormChange}></textarea>
-                    <button className="btn-submit">Simpan</button>
+                    <button className="btn-submit" onClick={this.handleSubmit}>Simpan</button>
                 </div>
                 {
                     this.state.post.map(post => {
